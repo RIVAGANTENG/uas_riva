@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:vibration/vibration.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../tools/animated_flip_counter.dart';
 
@@ -14,6 +15,7 @@ class PageTasbih extends StatefulWidget {
 
 class PageTasbihState extends State<PageTasbih> {
   CarouselSliderController buttonCarouselController = CarouselSliderController();
+  // Mengurangi viewportFraction agar manik-manik terlihat lebih terpisah atau menyatu secara vertikal
   final PageController controller = PageController(viewportFraction: 0.1, initialPage: 5);
   final int numberOfCountsToCompleteRound = 33;
   String kBeadsCount = 'beadsCount';
@@ -65,6 +67,17 @@ class PageTasbihState extends State<PageTasbih> {
             color: Colors.black,
           ),
         ),
+        actions: [
+          // Tombol Logout
+          IconButton(
+            tooltip: 'Logout',
+            icon: const Icon(Icons.logout, color: Colors.black),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              // Tidak perlu navigasi eksplisit, StreamBuilder di main.dart akan menanganinya
+            },
+          ),
+        ],
       ),
       body: GestureDetector(
         onTap: _clicked,
@@ -183,14 +196,20 @@ class PageTasbihState extends State<PageTasbih> {
             ),
             Expanded(
               flex: 1,
+              // Hilangkan RotatedBox di sini jika ingin PageView langsung vertikal
+              // dan rotasi hanya pada gambar jika diperlukan orientasi spesifik
               child: PageView.builder(
                 reverse: true,
                 physics: const NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.vertical, // Tetapkan arah scroll vertikal
                 controller: controller,
-                scrollDirection: Axis.vertical,
                 itemBuilder: (_, __) {
-                  return Image.asset(
-                    'assets/beads/bead-$imageIndex.png',
+                  return Center( // Pusatkan setiap manik-manik secara vertikal
+                    child: Image.asset(
+                      'assets/beads/bead-$imageIndex.png',
+                      // Tambahkan width atau height sesuai kebutuhan agar gambar tidak terlalu besar
+                      // Misalnya, width: 80, height: 80, atau sesuaikan dengan viewport
+                    ),
                   );
                 },
                 itemCount: null,
@@ -206,7 +225,7 @@ class PageTasbihState extends State<PageTasbih> {
     bool? canVibrate = await Vibration.hasVibrator();
     if (!isDisposed) {
       setState(() {
-        canVibrate = canVibrate!;
+        this.canVibrate = canVibrate;
         loadData();
       });
     }
