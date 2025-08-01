@@ -1,16 +1,29 @@
-# tasbih
+# Judul Aplikasi
+Tasbih Digital
+## Deskripsi Singkat
+Dzikir pake tasbih digital fleksibel kapanpun, dimanapun
 
-A new Flutter project.
+## Teknologi yang Digunakan
+- ✅ Shared Preferences (penjelasan penggunaan)
+- ✅ Firebase Auth (login/register)
+- ✅ Cloud Firestore (data disimpan di ...)
+- ✅ JSON Server (URL: ...)
+- ✅ Animasi: [jelaskan jenis animasi yang digunakan]
 
-## Getting Started
+## Screenshot Aplikasi
+![](/screenshots/a.png)
+![](/screenshots/b.png)
+![](/screenshots/c.png)
 
-This project is a starting point for a Flutter application.
+## Struktur Folder (opsional)
+![](/screenshots/d.png)
 
-A few resources to get you started if this is your first Flutter project:
+## Cara Menjalankan
+1. Clone repo ini
+2. Jalankan `flutter pub get`
+3. Setup Firebase config di `lib/firebase_options.dart`
+4. Jalankan dengan `flutter run`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Kontributor
+- Nama: Riva Yudhistira Arianto
+- NIM: 2022804176
